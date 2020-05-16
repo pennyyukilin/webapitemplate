@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Employee" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipCountry" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipCity" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipPostCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShipVia" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="float" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="Total" Type="float" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UnitsInStock" Type="int" />
+          <Property Name="UnitsOnOrder" Type="int" />
+          <Property Name="RecorderLevel" Type="int" />
+        </EntityType>
+        <EntityType Name="SecurityRole">
+          <Key>
+            <PropertyRef Name="SecurityRoleId" />
+          </Key>
+          <Property Name="SecurityRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SecurityRoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SecurityUser">
+          <Key>
+            <PropertyRef Name="SecurityUserId" />
+          </Key>
+          <Property Name="SecurityUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="10" />
+          <Property Name="LastUpdatedOn" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="varchar" MaxLength="10" />
+          <Property Name="TenantCode" Type="varchar" MaxLength="10" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SecurityUserRole">
+          <Key>
+            <PropertyRef Name="SecurityUserRoleId" />
+          </Key>
+          <Property Name="SecurityUserRoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SecurityUserId" Type="int" />
+          <Property Name="SecurityRoleId" Type="int" />
+        </EntityType>
+        <Association Name="FK_SecurityUserRole_ToSecurityRole">
+          <End Role="SecurityRole" Type="Self.SecurityRole" Multiplicity="0..1" />
+          <End Role="SecurityUserRole" Type="Self.SecurityUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityRole">
+              <PropertyRef Name="SecurityRoleId" />
+            </Principal>
+            <Dependent Role="SecurityUserRole">
+              <PropertyRef Name="SecurityRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SecurityUserRole_ToSecurityUser">
+          <End Role="SecurityUser" Type="Self.SecurityUser" Multiplicity="0..1" />
+          <End Role="SecurityUserRole" Type="Self.SecurityUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="SecurityUserId" />
+            </Principal>
+            <Dependent Role="SecurityUserRole">
+              <PropertyRef Name="SecurityUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataModelStoreContainer">
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityRole" EntityType="Self.SecurityRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityUser" EntityType="Self.SecurityUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityUserRole" EntityType="Self.SecurityUserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SecurityUserRole_ToSecurityRole" Association="Self.FK_SecurityUserRole_ToSecurityRole">
+            <End Role="SecurityRole" EntitySet="SecurityRole" />
+            <End Role="SecurityUserRole" EntitySet="SecurityUserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SecurityUserRole_ToSecurityUser" Association="Self.FK_SecurityUserRole_ToSecurityUser">
+            <End Role="SecurityUser" EntitySet="SecurityUser" />
+            <End Role="SecurityUserRole" EntitySet="SecurityUserRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Customer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Employee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShipName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShipCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShipCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShipAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShipPostCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ShipVia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="OrderProducts" Relationship="Self.FK_OrderProduct_Order" FromRole="Order" ToRole="OrderProduct" />
+        </EntityType>
+        <EntityType Name="OrderProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Double" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="Total" Type="Double" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderProduct_Order" FromRole="OrderProduct" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_OrderProduct_Product" FromRole="OrderProduct" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnitsInStock" Type="Int32" />
+          <Property Name="UnitsOnOrder" Type="Int32" />
+          <Property Name="RecorderLevel" Type="Int32" />
+          <NavigationProperty Name="OrderProducts" Relationship="Self.FK_OrderProduct_Product" FromRole="Product" ToRole="OrderProduct" />
+        </EntityType>
+        <Association Name="FK_OrderProduct_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrderProducts" EntityType="Self.OrderProduct" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <AssociationSet Name="FK_OrderProduct_Order" Association="Self.FK_OrderProduct_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderProduct" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Product" Association="Self.FK_OrderProduct_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderProduct" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <EntitySet Name="SecurityRoles" EntityType="DataModel.SecurityRole" />
+          <EntitySet Name="SecurityUsers" EntityType="DataModel.SecurityUser" />
+          <EntitySet Name="SecurityUserRoles" EntityType="DataModel.SecurityUserRole" />
+          <AssociationSet Name="FK_SecurityUserRole_ToSecurityRole" Association="DataModel.FK_SecurityUserRole_ToSecurityRole">
+            <End Role="SecurityRole" EntitySet="SecurityRoles" />
+            <End Role="SecurityUserRole" EntitySet="SecurityUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SecurityUserRole_ToSecurityUser" Association="DataModel.FK_SecurityUserRole_ToSecurityUser">
+            <End Role="SecurityUser" EntitySet="SecurityUsers" />
+            <End Role="SecurityUserRole" EntitySet="SecurityUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SecurityRole">
+          <Key>
+            <PropertyRef Name="SecurityRoleId" />
+          </Key>
+          <Property Name="SecurityRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SecurityRoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SecurityUserRoles" Relationship="DataModel.FK_SecurityUserRole_ToSecurityRole" FromRole="SecurityRole" ToRole="SecurityUserRole" />
+        </EntityType>
+        <EntityType Name="SecurityUser">
+          <Key>
+            <PropertyRef Name="SecurityUserId" />
+          </Key>
+          <Property Name="SecurityUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TenantCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SecurityUserRoles" Relationship="DataModel.FK_SecurityUserRole_ToSecurityUser" FromRole="SecurityUser" ToRole="SecurityUserRole" />
+        </EntityType>
+        <EntityType Name="SecurityUserRole">
+          <Key>
+            <PropertyRef Name="SecurityUserRoleId" />
+          </Key>
+          <Property Name="SecurityUserRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SecurityUserId" Type="Int32" />
+          <Property Name="SecurityRoleId" Type="Int32" />
+          <NavigationProperty Name="SecurityRole" Relationship="DataModel.FK_SecurityUserRole_ToSecurityRole" FromRole="SecurityUserRole" ToRole="SecurityRole" />
+          <NavigationProperty Name="SecurityUser" Relationship="DataModel.FK_SecurityUserRole_ToSecurityUser" FromRole="SecurityUserRole" ToRole="SecurityUser" />
+        </EntityType>
+        <Association Name="FK_SecurityUserRole_ToSecurityRole">
+          <End Type="DataModel.SecurityRole" Role="SecurityRole" Multiplicity="0..1" />
+          <End Type="DataModel.SecurityUserRole" Role="SecurityUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityRole">
+              <PropertyRef Name="SecurityRoleId" />
+            </Principal>
+            <Dependent Role="SecurityUserRole">
+              <PropertyRef Name="SecurityRoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SecurityUserRole_ToSecurityUser">
+          <End Type="DataModel.SecurityUser" Role="SecurityUser" Multiplicity="0..1" />
+          <End Type="DataModel.SecurityUserRole" Role="SecurityUserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityUser">
+              <PropertyRef Name="SecurityUserId" />
+            </Principal>
+            <Dependent Role="SecurityUserRole">
+              <PropertyRef Name="SecurityUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataEntities">
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="DataModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="ShipName" ColumnName="ShipName" />
+                <ScalarProperty Name="ShipCountry" ColumnName="ShipCountry" />
+                <ScalarProperty Name="ShipCity" ColumnName="ShipCity" />
+                <ScalarProperty Name="ShipAddress" ColumnName="ShipAddress" />
+                <ScalarProperty Name="ShipPostCode" ColumnName="ShipPostCode" />
+                <ScalarProperty Name="ShipVia" ColumnName="ShipVia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderProducts">
+            <EntityTypeMapping TypeName="DataModel.OrderProduct">
+              <MappingFragment StoreEntitySet="OrderProduct">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DataModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+                <ScalarProperty Name="UnitsOnOrder" ColumnName="UnitsOnOrder" />
+                <ScalarProperty Name="RecorderLevel" ColumnName="RecorderLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityRoles">
+            <EntityTypeMapping TypeName="DataModel.SecurityRole">
+              <MappingFragment StoreEntitySet="SecurityRole">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SecurityRoleName" ColumnName="SecurityRoleName" />
+                <ScalarProperty Name="SecurityRoleId" ColumnName="SecurityRoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityUsers">
+            <EntityTypeMapping TypeName="DataModel.SecurityUser">
+              <MappingFragment StoreEntitySet="SecurityUser">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="TenantCode" ColumnName="TenantCode" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SecurityUserId" ColumnName="SecurityUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityUserRoles">
+            <EntityTypeMapping TypeName="DataModel.SecurityUserRole">
+              <MappingFragment StoreEntitySet="SecurityUserRole">
+                <ScalarProperty Name="SecurityRoleId" ColumnName="SecurityRoleId" />
+                <ScalarProperty Name="SecurityUserId" ColumnName="SecurityUserId" />
+                <ScalarProperty Name="SecurityUserRoleId" ColumnName="SecurityUserRoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

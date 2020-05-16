@@ -1,0 +1,102 @@
+﻿﻿<#@ template language="C#" debug="true" hostspecific="true"#>
+<#@ include file="EF.Utility.CS.ttinclude"#>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Diagnostics" #>
+
+<#@ output extension=".cs"#>
+<#
+
+// This needs to be set to the .edmx file that you want to process.
+string edmxFile = @"../Dow.Template.AngularApp.Data.EF/DataModel.edmx"; 
+
+CodeGenerationTools code = new CodeGenerationTools(this);
+MetadataLoader loader = new MetadataLoader(this);
+MetadataTools ef = new MetadataTools(this);
+
+#>
+
+<#
+
+
+EdmItemCollection ItemCollection = loader.CreateEdmItemCollection(edmxFile);
+EntityContainer container = ItemCollection.GetItems<EntityContainer>().FirstOrDefault();
+EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this);
+
+
+
+foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+{
+
+	if(!DoesFileExist("I" + entity.Name + "Repository.cs"))
+	{
+		fileManager.StartNewFile("I" +entity.Name + "Repository.cs");
+		#>
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace <#= code.VsNamespaceSuggestion() #>
+{  
+	<#=Accessibility.ForType(entity)#> <#=code.SpaceAfter(code.AbstractOption(entity))#> interface I<#=code.Escape(entity)#>Repository : IRepository<<#=code.Escape(entity)#>>
+	{
+
+	}
+}
+
+
+<#
+	}
+	else
+	{
+		fileManager.StartNewFile("I" + entity.Name + "Repository.cs");
+		this.Write(OutputFile("I" + entity.Name + "Repository.cs"));
+	}
+}
+
+fileManager.Process();
+#>
+
+<#+
+
+bool DoesFileExist(string filename)
+{			
+	return File.Exists(Path.Combine(GetCurrentDirectory(),filename));	
+}
+
+string OutputFile(string filename)
+{
+	using(StreamReader sr = new StreamReader(Path.Combine(GetCurrentDirectory(),filename)))
+	{
+		string contents = sr.ReadToEnd();
+		return contents;
+	}
+}
+
+string GetCurrentDirectory()
+{
+	string executingDirectoryName = "";
+	string stackTraceFileName = new StackTrace(true).GetFrame(0).GetFileName();
+	if (String.IsNullOrEmpty(stackTraceFileName))
+	{
+		throw new ArgumentException("No value was specified for the 'directoryName' configuration parameter" +
+			", and we could not figure out the file name from the stack trace (most likely because of running " +
+			"the template with debug='False' specified in the <\u0023@ template \u0023> directive.");
+	}
+	else
+	{		
+		executingDirectoryName = Path.GetDirectoryName(stackTraceFileName);
+	}	
+	return executingDirectoryName;
+}
+
+string FindEDMXFileName()
+{
+	string edmxFile = "";
+				
+	string[] entityFrameworkFiles = Directory.GetFiles(GetCurrentDirectory(), "*.edmx");
+	if(entityFrameworkFiles.Length > 0)
+		edmxFile = entityFrameworkFiles[0];
+	
+	return edmxFile;
+}
+#>

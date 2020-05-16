@@ -1,0 +1,128 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dow.Template.AngularApp.Data.Interface", "Dow.Template.AngularApp.Data.Interface\Dow.Template.AngularApp.Data.Interface.csproj", "{7BCE27C5-B14B-49CC-ACE0-0F246DABF55E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dow.Template.AngularApp.Data.EF", "Dow.Template.AngularApp.Data.EF\Dow.Template.AngularApp.Data.EF.csproj", "{BFA12AA0-F860-4AD0-9EAC-823F32EC5FE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dow.Template.AngularApp.Common", "Dow.Template.AngularApp.Common\Dow.Template.AngularApp.Common.csproj", "{89AEE23B-A2C5-4204-BE9D-EB8707AA3596}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dow.Template.AngularApp.Service", "Dow.Template.AngularApp.Service\Dow.Template.AngularApp.Service.csproj", "{9F2CCFFE-018D-49B6-A233-0F36A53C6FBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dow.Template.AngularApp.Biz.Interface", "Dow.Template.AngularApp.Biz.Interface\Dow.Template.AngularApp.Biz.Interface.csproj", "{42A12793-DF12-440C-80BA-40CB82D0CA37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dow.Template.AngularApp.Biz.Impl", "Dow.Template.AngularApp.Biz.Impl\Dow.Template.AngularApp.Biz.Impl.csproj", "{76EE4C6C-DD8D-45D6-B325-5F7605DDBCD5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{26CB7951-352B-4107-B8D3-9BF51F647558}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{083FF696-ADCE-4C2C-BF40-19B79885099C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{1CE7943E-B545-4D77-926F-B7A54BBD3DFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dow.Template.AngularApp.Biz.Impl.Test", "Dow.Template.AngularApp.Biz.Impl.Test\Dow.Template.AngularApp.Biz.Impl.Test.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItem", "SolutionItem", "{549B04F4-8486-4BDC-BF15-1ABC4A5641A9}"
+	ProjectSection(SolutionItems) = preProject
+		SolutionItem\DowRules.ruleset = SolutionItem\DowRules.ruleset
+	EndProjectSection
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Dow.Template.AngularApp.Database", "Dow.Template.AngularApp.Database\Dow.Template.AngularApp.Database.sqlproj", "{158B9D02-0169-431B-B180-4B5776B8482E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BCE27C5-B14B-49CC-ACE0-0F246DABF55E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BCE27C5-B14B-49CC-ACE0-0F246DABF55E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BCE27C5-B14B-49CC-ACE0-0F246DABF55E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BCE27C5-B14B-49CC-ACE0-0F246DABF55E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFA12AA0-F860-4AD0-9EAC-823F32EC5FE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFA12AA0-F860-4AD0-9EAC-823F32EC5FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFA12AA0-F860-4AD0-9EAC-823F32EC5FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFA12AA0-F860-4AD0-9EAC-823F32EC5FE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89AEE23B-A2C5-4204-BE9D-EB8707AA3596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89AEE23B-A2C5-4204-BE9D-EB8707AA3596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89AEE23B-A2C5-4204-BE9D-EB8707AA3596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89AEE23B-A2C5-4204-BE9D-EB8707AA3596}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F2CCFFE-018D-49B6-A233-0F36A53C6FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F2CCFFE-018D-49B6-A233-0F36A53C6FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F2CCFFE-018D-49B6-A233-0F36A53C6FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F2CCFFE-018D-49B6-A233-0F36A53C6FBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42A12793-DF12-440C-80BA-40CB82D0CA37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42A12793-DF12-440C-80BA-40CB82D0CA37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42A12793-DF12-440C-80BA-40CB82D0CA37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42A12793-DF12-440C-80BA-40CB82D0CA37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76EE4C6C-DD8D-45D6-B325-5F7605DDBCD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76EE4C6C-DD8D-45D6-B325-5F7605DDBCD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76EE4C6C-DD8D-45D6-B325-5F7605DDBCD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76EE4C6C-DD8D-45D6-B325-5F7605DDBCD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{158B9D02-0169-431B-B180-4B5776B8482E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{158B9D02-0169-431B-B180-4B5776B8482E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{158B9D02-0169-431B-B180-4B5776B8482E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{158B9D02-0169-431B-B180-4B5776B8482E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{158B9D02-0169-431B-B180-4B5776B8482E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{158B9D02-0169-431B-B180-4B5776B8482E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7BCE27C5-B14B-49CC-ACE0-0F246DABF55E} = {1CE7943E-B545-4D77-926F-B7A54BBD3DFD}
+		{BFA12AA0-F860-4AD0-9EAC-823F32EC5FE2} = {1CE7943E-B545-4D77-926F-B7A54BBD3DFD}
+		{89AEE23B-A2C5-4204-BE9D-EB8707AA3596} = {083FF696-ADCE-4C2C-BF40-19B79885099C}
+		{9F2CCFFE-018D-49B6-A233-0F36A53C6FBC} = {26CB7951-352B-4107-B8D3-9BF51F647558}
+		{42A12793-DF12-440C-80BA-40CB82D0CA37} = {083FF696-ADCE-4C2C-BF40-19B79885099C}
+		{76EE4C6C-DD8D-45D6-B325-5F7605DDBCD5} = {083FF696-ADCE-4C2C-BF40-19B79885099C}
+		{8EDF4429-251A-416D-BB68-93F227191BCF} = {083FF696-ADCE-4C2C-BF40-19B79885099C}
+		{158B9D02-0169-431B-B180-4B5776B8482E} = {1CE7943E-B545-4D77-926F-B7A54BBD3DFD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F22B445D-FC36-4932-8CA7-1731787F6AB5}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://jvsneapvm150.jvservices.com:8080/tfs/dowdevelopment
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Dow.Template.AngularApp.Biz.Impl\\Dow.Template.AngularApp.Biz.Impl.csproj
+		SccProjectTopLevelParentUniqueName1 = Dow.Template.AngularApp.sln
+		SccProjectName1 = Dow.Template.AngularApp.Biz.Impl
+		SccLocalPath1 = Dow.Template.AngularApp.Biz.Impl
+		SccProjectUniqueName2 = Dow.Template.AngularApp.Biz.Interface\\Dow.Template.AngularApp.Biz.Interface.csproj
+		SccProjectTopLevelParentUniqueName2 = Dow.Template.AngularApp.sln
+		SccProjectName2 = Dow.Template.AngularApp.Biz.Interface
+		SccLocalPath2 = Dow.Template.AngularApp.Biz.Interface
+		SccProjectUniqueName3 = Dow.Template.AngularApp.Common\\Dow.Template.AngularApp.Common.csproj
+		SccProjectTopLevelParentUniqueName3 = Dow.Template.AngularApp.sln
+		SccProjectName3 = Dow.Template.AngularApp.Common
+		SccLocalPath3 = Dow.Template.AngularApp.Common
+		SccProjectUniqueName4 = Dow.Template.AngularApp.Data.EF\\Dow.Template.AngularApp.Data.EF.csproj
+		SccProjectTopLevelParentUniqueName4 = Dow.Template.AngularApp.sln
+		SccProjectName4 = Dow.Template.AngularApp.Data.EF
+		SccLocalPath4 = Dow.Template.AngularApp.Data.EF
+		SccProjectUniqueName5 = Dow.Template.AngularApp.Data.Interface\\Dow.Template.AngularApp.Data.Interface.csproj
+		SccProjectTopLevelParentUniqueName5 = Dow.Template.AngularApp.sln
+		SccProjectName5 = Dow.Template.AngularApp.Data.Interface
+		SccLocalPath5 = Dow.Template.AngularApp.Data.Interface
+		SccProjectUniqueName6 = Dow.Template.AngularApp.Service\\Dow.Template.AngularApp.Service.csproj
+		SccProjectTopLevelParentUniqueName6 = Dow.Template.AngularApp.sln
+		SccProjectName6 = Dow.Template.AngularApp.Service
+		SccLocalPath6 = Dow.Template.AngularApp.Service
+		SccProjectUniqueName7 = Dow.Template.AngularApp.Biz.Impl.Test\\Dow.Template.AngularApp.Biz.Impl.Test.csproj
+		SccProjectTopLevelParentUniqueName7 = Dow.Template.AngularApp.sln
+		SccProjectName7 = Dow.Template.AngularApp.Biz.Impl.Test
+		SccLocalPath7 = Dow.Template.AngularApp.Biz.Impl.Test
+		SccProjectUniqueName8 = Dow.Template.AngularApp.Database\\Dow.Template.AngularApp.Database.sqlproj
+		SccProjectTopLevelParentUniqueName8 = Dow.Template.AngularApp.sln
+		SccProjectName8 = Dow.Template.AngularApp.Database
+		SccLocalPath8 = Dow.Template.AngularApp.Database
+	EndGlobalSection
+EndGlobal
